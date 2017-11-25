@@ -6,6 +6,7 @@ import task07.readers.*;
 public class Main {
 
     public static void main(String[] args) {
+    
         Text text = new Text();
         try {
             Reader r = new PlantTextReader("new.txt");
@@ -19,6 +20,7 @@ public class Main {
         }
         
         System.out.println(text.toString());
+        System.out.println(text.getElementsType());
     }
 
 }

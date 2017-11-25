@@ -1,10 +1,9 @@
 package task07.elements;
 
-public class Word extends Element {
-    public Word() {};
-    
+public class Word implements State {
     @Override
-    public int getVovelsProportion() {
+    public int getVovelsCount() {
+        // TODO Auto-generated method stub
         return 0;
     }
 }

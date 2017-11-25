@@ -1,5 +1,8 @@
 package task07.elements;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Symbol {
     private char ch;
 
@@ -15,15 +18,16 @@ public class Symbol {
         return ((ch == '.') || (ch == '!') || (ch == '?'));
     }
     
-//    public boolean isPunctuationMark() {
-//        //. ; , : - ? ! ... ( ) " "
-//        return ((ch == ''));
-//    }
+    public boolean isPunctuationMark() {
+        Pattern p = Pattern.compile("[\\.\\,\\(\\)\\:\\;\\!\\'\\-\\_\\?\"]+");
+        Matcher m = p.matcher(String.valueOf(ch));
+        return m.matches();
+    }
     
     public boolean isSpace() {
         return ch == ' ';        
     }
-
+    
     public boolean isNewLine() {
         return ch == '\n';
     }

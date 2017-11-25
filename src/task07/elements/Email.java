@@ -1,8 +1,11 @@
 package task07.elements;
 
-public class Space implements State {
+import task07.elements.State;
+
+public class Email implements State {
     @Override
     public int getVovelsCount() {
         return 0;
     }
+
 }

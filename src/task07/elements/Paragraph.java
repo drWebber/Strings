@@ -5,8 +5,16 @@ import java.util.List;
 
 public class Paragraph {
     private List<Sentence> list = new ArrayList<Sentence>();
-    
+
     public Paragraph() {};
+    
+    public List<Sentence> getList() {
+        return list;
+    }
+
+    public void setList(List<Sentence> list) {
+        this.list = list;
+    }
 
     public void append(Sentence sentence) {
         list.add(sentence);
@@ -14,7 +22,7 @@ public class Paragraph {
 
     @Override
     public String toString() {
-        String s = "";
+        String s = "\n";
         for (Sentence sentence : list) {
             s += sentence.toString();
         }
