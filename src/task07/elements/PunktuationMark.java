@@ -5,9 +5,4 @@ public class PunktuationMark implements State {
     public int getVowelCount(Element element) {
         return 0;
     }
-
-    @Override
-    public String toString() {
-        return "p";
-    }
 }

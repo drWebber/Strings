@@ -39,14 +39,6 @@ public class Text {
         return elements;
     }
     
-    public String toMaskedString() {
-        String s = "";
-        for (Paragraph paragraph : paragraphs) {
-            s += paragraph.toMaskedString() + "\n";
-        }
-        return s;
-    }
-    
     @Override
     public String toString() {
         String s = "";

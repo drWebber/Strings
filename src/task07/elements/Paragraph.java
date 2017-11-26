@@ -45,13 +45,4 @@ public class Paragraph {
         }
         return s;
     }
-
-    public String toMaskedString() {
-        String s = "";
-        for (Sentence sentence : sentences) {
-            s += sentence.toMaskedString();
-        }
-        return s;
-    }
-
 }

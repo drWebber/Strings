@@ -74,12 +74,4 @@ public class Element {
         }
         return s;
     }
-
-    public String toMaskedString() {
-        String s = "";
-        for (int i = 0; i < symbols.size(); i++) {
-            s += state.toString();
-        }
-        return s;
-    }
 }

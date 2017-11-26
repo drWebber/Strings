@@ -13,9 +13,4 @@ public class Email implements State {
         }
         return vowels;
     }
-
-    @Override
-    public String toString() {
-        return "e";
-    }
 }

@@ -11,9 +11,4 @@ public class Word implements State {
         }
         return vowels;
     }
-
-    @Override
-    public String toString() {
-        return "w";
-    }
 }

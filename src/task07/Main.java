@@ -18,8 +18,6 @@ public class Main {
             System.out.println("Processed text:");
             System.out.println(text.toString());
             
-            System.out.println(text.toMaskedString());
-            
             TextReviewer tr = new TextReviewer();
             tr.setElements(text.getElements());
             tr.sort(new VowelPartComparator());

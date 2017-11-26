@@ -11,7 +11,7 @@ public class Symbol {
     }
     
     public boolean isPunctuationMark() {
-        Pattern p = Pattern.compile("[.\\,\\;\\:\\(\\)\\?\\-\\_]");
+        Pattern p = Pattern.compile("[.,;:()?\\-_…]");
         Matcher m = p.matcher(String.valueOf(ch));
         return m.matches();
     }
