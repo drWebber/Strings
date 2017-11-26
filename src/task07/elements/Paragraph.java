@@ -3,13 +3,22 @@ package task07.elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import task07.util.RegExp;
+
 public class Paragraph {
     private List<Sentence> sentences = new ArrayList<Sentence>();
 
     public Paragraph() {}
 
-    public Paragraph(List<Sentence> sentences) {
-        this.sentences = sentences;
+    public Paragraph(String paragraph) {
+        Sentence sentence;
+        RegExp rx = new RegExp(paragraph, 
+                ".+?(\\.(\\s|$)|\\?(\\s|$)|\\!(\\s|$)|$)");
+        List<String> lines = rx.getMatches();
+        for (String line : lines) {
+            sentence = new Sentence(line);
+            sentences.add(sentence);
+        }
     }
     
     public List<Sentence> getSentences() {
@@ -28,5 +37,4 @@ public class Paragraph {
         }
         return s;
     }
-    
 }

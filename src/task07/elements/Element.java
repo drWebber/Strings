@@ -12,7 +12,7 @@ public class Element {
     private List<Symbol> symbols = new ArrayList<Symbol>();
 
     public Element() {};
-
+    
     public Element(Symbol s) {
         symbols.add(s);
     };
@@ -25,15 +25,11 @@ public class Element {
         }
     }
     
-    public void append(Symbol s) {
-        symbols.add(s);
-    }
-    
-    public Symbol last() {
+    public Symbol last() throws IndexOutOfBoundsException {
         return symbols.get(symbols.size() - 1);
     }
     
-    public Symbol pop() {
+    public Symbol pop() throws IndexOutOfBoundsException {
         return symbols.remove(symbols.size() - 1);
     }
 

@@ -16,7 +16,6 @@ public class Main {
             
             System.out.println("A processed text:");
             System.out.println(text.toString());
-            System.out.println(text.getElementsType());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

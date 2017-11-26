@@ -3,13 +3,20 @@ package task07.elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import task07.util.RegExp;
+
 public class Sentence {
     private List<Element> elements = new ArrayList<Element>();
     
     public Sentence() {}
     
-    public Sentence(List<Element> elements) {
-        this.elements = elements;
+    public Sentence(String sentence) {
+        RegExp rx = new RegExp(sentence, ".+?(\\s|$)");
+        List<String> lines = rx.getMatches();
+        for (String line : lines) {
+            ElementSequence ws = new ElementSequence(line);
+            elements.addAll(ws.getElements());
+        }        
     }
     
     public void setElements(List<Element> list) {
@@ -28,5 +35,4 @@ public class Sentence {
         }
         return s;
     }
-    
 }
