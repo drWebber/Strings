@@ -1,18 +1,27 @@
 package task07.readers;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class PlantTextReader implements Reader {
-    private FileReader reader;
+    private BufferedReader br;
     
     public PlantTextReader(String filePath) throws IOException {
-            reader = new FileReader(filePath);
+        br = new BufferedReader(new FileReader(filePath));
     }
 
     @Override
-    public int read() throws IOException {
-        return reader.read();
+    public String read() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        String line = br.readLine();
+
+        while (line != null) {
+            sb.append(line);
+            sb.append(System.lineSeparator());
+            line = br.readLine();
+        }
+        return sb.toString();
     }
 
 }

@@ -4,26 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Paragraph {
-    private List<Sentence> list = new ArrayList<Sentence>();
+    private List<Sentence> sentences = new ArrayList<Sentence>();
 
-    public Paragraph() {};
+    public Paragraph() {}
+
+    public Paragraph(List<Sentence> sentences) {
+        this.sentences = sentences;
+    }
     
-    public List<Sentence> getList() {
-        return list;
+    public List<Sentence> getSentences() {
+        return sentences;
     }
 
-    public void setList(List<Sentence> list) {
-        this.list = list;
-    }
-
-    public void append(Sentence sentence) {
-        list.add(sentence);
+    public void setSentences(List<Sentence> list) {
+        this.sentences = list;
     }
 
     @Override
     public String toString() {
-        String s = "\n";
-        for (Sentence sentence : list) {
+        String s = "";
+        for (Sentence sentence : sentences) {
             s += sentence.toString();
         }
         return s;

@@ -1,82 +1,34 @@
 package task07;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
 import task07.elements.*;
+import task07.util.RegExp;
 
 public class Text {
-    private List<Paragraph> list = new ArrayList<Paragraph>();
-    private Paragraph paragraph = new Paragraph();
-    private Sentence sentence = new Sentence();
-    private Element element = new Element();
-    
+    private List<Paragraph> paragraphs = new ArrayList<Paragraph>();
+
     public Text() {};
     
-    public void append(Symbol s) {
-        if (s.isSpace()) {
-            if (!element.isNull()) {
-                State state = computeState(element);
-                sentence.append(element.setState(state));
-                element = new Element();
-            }
-            element.append(s);
-            if (!sentence.isLastSpace()) {
-                sentence.append(element.setState(new Space()));
-            }
-            element = new Element();                
-        } else if (s.isSentenceEnd()) {
-            if (!element.hasAtMark()) {
-                if (!element.isNull()) {
-                    sentence.append(element.setState(new Word()));
-                    element = new Element(); /* flush element */
-                }
-                element.append(s); /* append current punctuation mark */
-                sentence.append(element.setState(new PunktuationMark()));
-                paragraph.append(sentence);
-                element = new Element();
-                sentence = new Sentence(); /* flush sentence */
-            }
-        } else if (s.isPunctuationMark()) {
-            element.append(s); /* append current punctuation mark */
-            sentence.append(element.setState(new PunktuationMark()));
-            element = new Element();     
-        } else if (s.isNewLine()) {
-            if (!element.isNull()) {
-                sentence.append(element.setState(new Word()));
-                paragraph.append(sentence);
-                element = new Element();
-                sentence = new Sentence();
-            }
-            addParagraph();
-        } else {
-            //append symbol to word
-            element.append(s);
-        }
-    }
-    
-    private State computeState(Element element) {
-        State state;
-        if (element.isEmail()) {
-            state = new Email();
-        } else if (element.isPhoneNumber()) {
-            state = new PhoneNumber();
-        } else {
-            state = new Word();
-        }
-        return state;
-    }
+    public Text(String text) {
+        Paragraph paragraph;
+        RegExp rx = new RegExp(text, "(\t{1,}| {2,})");
+        text = rx.replace(" ");
 
-    private void addParagraph() {
-        list.add(paragraph);
-        paragraph = new Paragraph();
+        rx = new RegExp(text, "(.+?)\r\n");
+        List<String> lines = rx.getMatches();
+        for (String line : lines) {
+            paragraph = new Paragraph(getSentences(line));
+            paragraphs.add(paragraph);
+        }
     }
     
     public String getElementsType() {
         String s = "";
-        for (Paragraph paragraph : list) {
-            for (Sentence sentence : paragraph.getList()) {
-                for (Element e : sentence.getList()) {
+        for (Paragraph paragraph : paragraphs) {
+            for (Sentence sentence : paragraph.getSentences()) {
+                for (Element e : sentence.getElements()) {
                     s += e.getState().getClass().getSimpleName() + " ";                    
                 }
             }
@@ -87,11 +39,61 @@ public class Text {
     @Override
     public String toString() {
         String s = "";
-        for (Paragraph paragraph : list) {
-            s += paragraph.toString();
+        for (Paragraph paragraph : paragraphs) {
+            s += paragraph.toString() + "\n";
         }
         return s;
-    };
+    }
     
+    /* splitting by sentences */
+    private List<Sentence> getSentences(String source) {
+        Sentence sentence;
+        List<Sentence> sentences = new ArrayList<Sentence>();
+        RegExp rx = new RegExp(source, 
+                ".+?(\\.(\\s|$)|\\?(\\s|$)|\\!(\\s|$)|$)");
+        List<String> lines = rx.getMatches();
+        for (String line : lines) {
+            sentence = new Sentence(getElements(line));
+            sentences.add(sentence);
+        }
+        return sentences;
+    }
     
+    /* Elements including states */
+    private List<Element> getElements(String source) {
+        List<Element> elements = new ArrayList<Element>();
+        RegExp rx = new RegExp(source, ".+?(\\s|$)");
+        List<String> lines = rx.getMatches();
+        for (String line : lines) {
+            elements.addAll(getItems(line));
+        }        
+        return elements;
+    }
+    
+    /* Splitting elements by states */
+    private List<Element> getItems(String source) {
+        List<Element> elements = new ArrayList<Element>();
+        Element e = new Element(source);
+        if (e.last().isCarriageReturn()) {
+            e.pop(); /* pop carriage return symbol */
+        }
+        if (e.last().isSpace()) {
+            Element spaceElem = new Element(e.pop());
+            elements.add(spaceElem.setState(new Space()));
+        }
+        while (e.last().isPunctuationMark()) {
+            Element pElem = new Element(e.pop());
+            elements.add(pElem.setState(new PunktuationMark()));            
+        }
+        if (e.isPhoneNumber()) {
+            e.setState(new PhoneNumber());
+        } else if (e.isEmail()) {
+            e.setState(new Email());
+        } else {
+            e.setState(new Word());
+        }
+        elements.add(e);
+        Collections.reverse(elements);
+        return elements;        
+    }
 }

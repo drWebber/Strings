@@ -9,16 +9,32 @@ import task07.elements.Symbol;
 
 public class Element {
     private State state;
-    private List<Symbol> list = new ArrayList<Symbol>();
+    private List<Symbol> symbols = new ArrayList<Symbol>();
 
     public Element() {};
-    
-    public Element(State state) {
-        this.state = state;
+
+    public Element(Symbol s) {
+        symbols.add(s);
+    };
+
+    public Element(String str) {
+        Symbol s;
+        for (int i = 0; i < str.length(); i++) {
+            s = new Symbol(str.charAt(i));
+            symbols.add(s);
+        }
     }
     
     public void append(Symbol s) {
-        list.add(s);
+        symbols.add(s);
+    }
+    
+    public Symbol last() {
+        return symbols.get(symbols.size() - 1);
+    }
+    
+    public Symbol pop() {
+        return symbols.remove(symbols.size() - 1);
     }
 
     public State getState() {
@@ -30,24 +46,12 @@ public class Element {
         return this;
     }
     
-    public List<Symbol> getList() {
-        return list;
+    public List<Symbol> getSymbols() {
+        return symbols;
     }
 
-    public void setList(List<Symbol> list) {
-        this.list = list;
-    }
-    
-    public boolean isNull() {
-        return list.size() == 0;
-    }
-    
-    public Symbol last() {
-        int size = list.size();
-        if (size <= 0) {
-            return new Symbol(0);
-        }
-        return list.get(size - 1);
+    public void setSymbols(List<Symbol> list) {
+        this.symbols = list;
     }
     
     public int getVovelsCount() {
@@ -55,7 +59,7 @@ public class Element {
     }
 
     public boolean isEmail() {
-        Pattern p = Pattern.compile("^.+?@.+?\\..{2,}$");
+        Pattern p = Pattern.compile(".+?@.+?\\..{2,}");
         Matcher m = p.matcher(this.toString());
         return m.matches();
     }
@@ -66,14 +70,10 @@ public class Element {
         return m.matches();
     }
     
-    public boolean hasAtMark() {
-        return this.toString().contains("@");
-    }
-    
     @Override
     public String toString() {
         String s = "";
-        for (Symbol symbol : list) {
+        for (Symbol symbol : symbols) {
             s += symbol.toString();
         }
         return s;

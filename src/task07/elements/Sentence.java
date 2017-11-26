@@ -4,33 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sentence {
-    private List<Element> list = new ArrayList<Element>();
+    private List<Element> elements = new ArrayList<Element>();
     
-    public void setList(List<Element> list) {
-        this.list = list;
-    }
-
-    public List<Element> getList() {
-        return list;
-    }
-
-    public void append(Element elem) {
-        list.add(elem);
+    public Sentence() {}
+    
+    public Sentence(List<Element> elements) {
+        this.elements = elements;
     }
     
-    public boolean isLastSpace() {
-        int size = list.size();
-        if (size <= 0) {
-            return false;
-        }
-        Element e = list.get(size - 1);
-        return e.last().isSpace();
+    public void setElements(List<Element> list) {
+        this.elements = list;
+    }
+
+    public List<Element> getElements() {
+        return elements;
     }
     
     @Override
     public String toString() {
         String s = "";
-        for (Element element : list) {
+        for (Element element : elements) {
             s += element.toString();
         }
         return s;
