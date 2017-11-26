@@ -50,8 +50,8 @@ public class Element {
         this.symbols = list;
     }
     
-    public int getVovelsCount() {
-        return state.getVovelsCount();
+    public int getVowelCount() {
+        return state.getVowelCount(this);
     }
 
     public boolean isEmail() {
@@ -71,6 +71,14 @@ public class Element {
         String s = "";
         for (Symbol symbol : symbols) {
             s += symbol.toString();
+        }
+        return s;
+    }
+
+    public String toMaskedString() {
+        String s = "";
+        for (int i = 0; i < symbols.size(); i++) {
+            s += state.toString();
         }
         return s;
     }

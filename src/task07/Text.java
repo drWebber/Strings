@@ -22,6 +22,30 @@ public class Text {
             paragraphs.add(paragraph);
         }
     }
+
+    public List<Paragraph> getParagraphs() {
+        return paragraphs;
+    }
+
+    public void setParagraphs(List<Paragraph> paragraphs) {
+        this.paragraphs = paragraphs;
+    }
+    
+    public List<Element> getElements() {
+        List<Element> elements = new ArrayList<Element>();
+        for (Paragraph paragraph : paragraphs) {
+            elements.addAll(paragraph.getElements());
+        }
+        return elements;
+    }
+    
+    public String toMaskedString() {
+        String s = "";
+        for (Paragraph paragraph : paragraphs) {
+            s += paragraph.toMaskedString() + "\n";
+        }
+        return s;
+    }
     
     @Override
     public String toString() {

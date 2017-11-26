@@ -15,11 +15,6 @@ public class Symbol {
         Matcher m = p.matcher(String.valueOf(ch));
         return m.matches();
     }
-    
-    @Override
-    public String toString() {
-        return String.valueOf(ch);
-    }
 
     public boolean isSpace() {
         return ch == ' ';
@@ -27,5 +22,16 @@ public class Symbol {
 
     public boolean isCarriageReturn() {
         return ch == '\r';
+    }
+    
+    public boolean isVowel() {
+        Pattern p = Pattern.compile("[aeiouy]");
+        Matcher m = p.matcher(String.valueOf(ch));
+        return m.matches();
+    }
+    
+    @Override
+    public String toString() {
+        return String.valueOf(ch);
     }
 }

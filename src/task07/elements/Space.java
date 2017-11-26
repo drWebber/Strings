@@ -2,7 +2,12 @@ package task07.elements;
 
 public class Space implements State {
     @Override
-    public int getVovelsCount() {
+    public int getVowelCount(Element element) {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return " ";
     }
 }

@@ -28,6 +28,14 @@ public class Paragraph {
     public void setSentences(List<Sentence> list) {
         this.sentences = list;
     }
+    
+    public List<Element> getElements() {
+        List<Element> elements = new ArrayList<Element>();
+        for (Sentence sentence : sentences) {
+            elements.addAll(sentence.getElements());
+        }
+        return elements;
+    }
 
     @Override
     public String toString() {
@@ -37,4 +45,13 @@ public class Paragraph {
         }
         return s;
     }
+
+    public String toMaskedString() {
+        String s = "";
+        for (Sentence sentence : sentences) {
+            s += sentence.toMaskedString();
+        }
+        return s;
+    }
+
 }

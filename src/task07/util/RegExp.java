@@ -6,20 +6,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegExp {
-    private String pattern;
+    private Pattern pattern;
     private String text;
     
     public RegExp(String text, String pattern) {
-        this.pattern = pattern;
+        this.pattern = Pattern.compile(pattern);
         this.text = text;
     }
     
-    public String getPattern() {
+    public Pattern getPattern() {
         return pattern;
     }
 
     public void setPattern(String pattern) {
-        this.pattern = pattern;
+        this.pattern = Pattern.compile(pattern);
     }
 
     public String getMatcher() {
@@ -32,8 +32,7 @@ public class RegExp {
 
     public List<String> getMatches() {
         List<String> list = new ArrayList<String>();
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(text);
+        Matcher m = pattern.matcher(text);
         while (m.find()) {
             list.add(m.group());
         }
@@ -41,8 +40,7 @@ public class RegExp {
     }
     
     public String replace(String replaceTo) {
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(text);
+        Matcher m = pattern.matcher(text);
         return m.replaceAll(replaceTo);
     }
 }

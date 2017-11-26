@@ -35,4 +35,12 @@ public class Sentence {
         }
         return s;
     }
+
+    public String toMaskedString() {
+        String s = "";
+        for (Element element : elements) {
+            s += element.toMaskedString();
+        }
+        return s;
+    }
 }
