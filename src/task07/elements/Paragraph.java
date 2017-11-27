@@ -12,7 +12,7 @@ public class Paragraph {
 
     public Paragraph(String paragraph) {
         Sentence sentence;
-        RegExp rx = new RegExp(paragraph, 
+        RegExp rx = new RegExp(paragraph,
                 ".+?(\\.(\\s|$)|\\?(\\s|$)|\\!(\\s|$)|$)");
         List<String> lines = rx.getMatches();
         for (String line : lines) {
@@ -20,7 +20,7 @@ public class Paragraph {
             sentences.add(sentence);
         }
     }
-    
+
     public List<Sentence> getSentences() {
         return sentences;
     }
@@ -28,7 +28,7 @@ public class Paragraph {
     public void setSentences(List<Sentence> list) {
         this.sentences = list;
     }
-    
+
     public List<Element> getElements() {
         List<Element> elements = new ArrayList<Element>();
         for (Sentence sentence : sentences) {
@@ -38,7 +38,7 @@ public class Paragraph {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         String s = "";
         for (Sentence sentence : sentences) {
             s += sentence.toString();

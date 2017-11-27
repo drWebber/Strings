@@ -13,22 +13,22 @@ public class Element {
 
     public Element() {};
     
-    public Element(Symbol s) {
+    public Element(final Symbol s) {
         symbols.add(s);
     };
 
-    public Element(String str) {
+    public Element(final String str) {
         Symbol s;
         for (int i = 0; i < str.length(); i++) {
             s = new Symbol(str.charAt(i));
             symbols.add(s);
         }
     }
-    
+
     public Symbol last() throws IndexOutOfBoundsException {
         return symbols.get(symbols.size() - 1);
     }
-    
+
     public Symbol pop() throws IndexOutOfBoundsException {
         return symbols.remove(symbols.size() - 1);
     }
@@ -41,7 +41,7 @@ public class Element {
         this.state = state;
         return this;
     }
-    
+
     public List<Symbol> getSymbols() {
         return symbols;
     }
@@ -49,7 +49,7 @@ public class Element {
     public void setSymbols(List<Symbol> list) {
         this.symbols = list;
     }
-    
+
     public int getVowelCount() {
         return state.getVowelCount(this);
     }
@@ -65,7 +65,7 @@ public class Element {
         Matcher m = p.matcher(this.toString());
         return m.matches();
     }
-    
+
     @Override
     public String toString() {
         String s = "";

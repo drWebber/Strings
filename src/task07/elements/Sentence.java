@@ -16,9 +16,9 @@ public class Sentence {
         for (String line : lines) {
             ElementSequence ws = new ElementSequence(line);
             elements.addAll(ws.getElements());
-        }        
+        }
     }
-    
+
     public void setElements(List<Element> list) {
         this.elements = list;
     }
@@ -26,9 +26,9 @@ public class Sentence {
     public List<Element> getElements() {
         return elements;
     }
-    
+
     @Override
-    public String toString() {
+    public final String toString() {
         String s = "";
         for (Element element : elements) {
             s += element.toString();

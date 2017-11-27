@@ -9,7 +9,7 @@ public class ElementSequence {
 
     public ElementSequence(String sequence) {
         Element e = new Element(sequence);
-        
+
         try {
             if (e.last().isCarriageReturn()) {
                 e.pop(); /* pop carriage return symbol */
@@ -20,13 +20,13 @@ public class ElementSequence {
             }
             while (e.last().isPunctuationMark()) {
                 Element pElem = new Element(e.pop());
-                elements.add(pElem.setState(new PunktuationMark()));            
-            }            
+                elements.add(pElem.setState(new PunktuationMark()));
+            }
         } catch (IndexOutOfBoundsException ex) {
-            System.err.println("WordSequence elements index out of bounds: " 
+            System.err.println("WordSequence elements index out of bounds: "
                     + ex.getMessage());
         }
-        
+
         if (e.isPhoneNumber()) {
             e.setState(new PhoneNumber());
         } else if (e.isEmail()) {
@@ -35,9 +35,9 @@ public class ElementSequence {
             e.setState(new Word());
         }
         elements.add(e);
-        Collections.reverse(elements);        
+        Collections.reverse(elements);
     }
-    
+
     public List<Element> getElements() {
         return elements;
     }

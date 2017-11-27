@@ -7,8 +7,8 @@ import java.util.List;
 
 public class TextReviewer {
     private List<Element> elements = new ArrayList<Element>();
-    
-    public TextReviewer() {}
+
+    public TextReviewer() { }
 
     public List<Element> getElements() {
         return elements;
@@ -17,11 +17,11 @@ public class TextReviewer {
     public void setElements(List<Element> elements) {
         this.elements = elements;
     }
-    
+
     public void sort (Comparator<Element> comparator) {
         elements.sort(comparator);
     }
-    
+
     @Override
     public String toString() {
         String s = "";
