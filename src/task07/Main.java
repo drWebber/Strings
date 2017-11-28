@@ -8,7 +8,8 @@ import task07.comparators.VowelPartComparator;
  * The main class that automatically executes an application.
  */
 public class Main {
-    /** The main method of an application.
+    /** 
+     * The main method of an application.
      * @param args Command line arguments.
      */
     public static void main(final String[] args) {
@@ -23,11 +24,9 @@ public class Main {
             System.out.println("Processed text:");
             System.out.println(text.toString());
 
-            TextReviewer tr = new TextReviewer();
-            tr.setElements(text.getElements());
+            TextReviewer tr = new TextReviewer(text.getElements());
             tr.sort(new VowelPartComparator());
-            System.out.println("Text elements, rearranged by vowels count"
-                    + " (by descending):");
+            System.out.println("Text elements, rearranged by vowels count:");
             System.out.println(tr);
         } catch (Exception e) {
             System.out.println(e.getMessage());

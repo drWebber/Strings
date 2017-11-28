@@ -39,7 +39,7 @@ public class Text {
         }
     }
 
-    /** Returns the list of paragraphs objects.
+    /** Returns the list of paragraph objects.
      * @return The list of paragraphs.
      * @see task07.elements.Paragraph.
      */
@@ -47,7 +47,7 @@ public class Text {
         return paragraphs;
     }
 
-    /** Set the list of paragraphs objects as the Text context.
+    /** Set the list of paragraph objects as the Text context.
      * @param paragraphs The list of Paragraphs objects.
      * @see task07.elements.Paragraph.
      */
@@ -55,7 +55,7 @@ public class Text {
         this.paragraphs = paragraphs;
     }
 
-    /** Returns the list of sentence elements objects.
+    /** Returns the list of sentence element objects.
      * @return The list of Elements.
      * @see task07.elements.Elements.
      */
